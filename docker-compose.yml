@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: php-laravel-hello-world_app
+    container_name: laravel-app
+    volumes:
+      - .:/var/www
+    networks:
+      - laravel-net
+
+  web:
+    image: nginx:latest
+    container_name: laravel-nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - laravel-net
+
+networks:
+  laravel-net:
+    driver: bridge
+

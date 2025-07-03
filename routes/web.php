@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/laravel', function () {
     return view('welcome');
 });
 
@@ -25,4 +25,3 @@ Route::get('/hello/{message?}', function ($message = null) {
 });
 
 Route::get('/world/{message?}', 'WorldController@show');
-
